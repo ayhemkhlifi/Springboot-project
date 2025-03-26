@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+      @apply relative z-1 text-base font-normal text-black bg-[#020D1A] ;
+  }
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+
+  .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+  }
+
+}
+
+.flex-center{
+  @apply flex justify-center items-center;
+}
