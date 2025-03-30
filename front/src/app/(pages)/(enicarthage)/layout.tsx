@@ -1,23 +1,19 @@
-"use client"
+"use client";
+
 import "@src/css/globals.css";
 import DefaultLayout from "@src/components/layouts/DefaultLayout";
-
-
-
 import { sideList } from "@src/data/sideItems";
-import { whoami } from "@src/shared/variables";
+import useWhoami from "@src/hooks/useWhoami";
+
+import { usePathname } from "next/navigation";
 export default function PagesDefaultLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
+  const whoami = useWhoami();
+  const menuItems = sideList[whoami] || sideList["student"];
   return (
-    <html lang="fr">
-      <body
-        className={""}
-      >
-      <DefaultLayout listItems={sideList[whoami]}>{children}</DefaultLayout>
-      </body>
-    </html>
+    <main>
+      <DefaultLayout listItems={menuItems}>{children}</DefaultLayout>
+    </main>
   );
 }
