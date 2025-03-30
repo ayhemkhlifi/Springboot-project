@@ -1,8 +1,17 @@
 
+import React from 'react'
+
+export default function page() {
+  return (
+    <div>page</div>
+  )
+}
+
+
 
 "use client"
 import React, { useState } from "react";
-import Link from "@node_modules/next/link";
+import Link from "next/link";
 const ProfilePage: React.FC = () => {
   const [image, setImage] = useState<string | null>(null);
 
@@ -65,3 +74,4 @@ const ProfilePage: React.FC = () => {
 };
 
 export default ProfilePage;
+
