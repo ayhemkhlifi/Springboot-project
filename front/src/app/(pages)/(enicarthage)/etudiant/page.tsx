@@ -1,14 +1,3 @@
-
-import React from 'react'
-
-export default function page() {
-  return (
-    <div>page</div>
-  )
-}
-
-
-
 "use client"
 import React, { useState } from "react";
 import Link from "next/link";
@@ -27,7 +16,7 @@ const ProfilePage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-100 to-white p-6">
+    <div className="flex flex-col items-center justify-center mt-4">
       <div className="bg-white shadow-xl rounded-2xl p-6 w-[400px] border border-gray-200">
         
         {/* Profile Photo */}
