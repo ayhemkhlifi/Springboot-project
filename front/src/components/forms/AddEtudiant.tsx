@@ -1,6 +1,9 @@
-import React from 'react';
+"use client"
+import React, { useState } from 'react';
 
 export default function AddEtudiant() {
+  const [niveau, setNiveau] = useState('');
+  
   return (
     <div className="mx-auto bg-white p-6 rounded-lg shadow-md w-10/12 text-black">
       <h2 className="text-2xl font-semibold text-gray-800 mb-3 text-center">
@@ -53,22 +56,46 @@ export default function AddEtudiant() {
           />
         </div>
 
-        {/* Niveau (Dropdown) */}
-        <div className="flex flex-col">
-          <label htmlFor="niveau" className="text-gray-700 font-medium mb-1">
-            Niveau
-          </label>
-          <select 
-            id="niveau" 
-            name="niveau" 
-            required 
-            className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          >
-            <option value="">Sélectionnez le niveau</option>
-            <option value="1ere">1ère</option>
-            <option value="2eme">2ème</option>
-            <option value="3eme">3ème</option>
-          </select>
+        {/* Niveau & Département */}
+        <div className="flex space-x-2">
+          {/* Niveau */}
+          <div className="flex flex-col w-1/2">
+            <label htmlFor="niveau" className="text-gray-700 font-medium mb-1">
+              Niveau
+            </label>
+            <select 
+              id="niveau" 
+              name="niveau" 
+              required 
+              value={niveau}
+              onChange={(e) => setNiveau(e.target.value)}
+              className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              <option value="">Sélectionnez le niveau</option>
+              <option value="1ere">1ère</option>
+              <option value="2eme">2ème</option>
+              <option value="3eme">3ème</option>
+            </select>
+          </div>
+          
+          {/* Département */}
+          <div className="flex flex-col w-1/2">
+            <label htmlFor="departement" className="text-gray-700 font-medium mb-1">
+              Département
+            </label>
+            <select 
+              id="departement" 
+              name="departement" 
+              required 
+              className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              <option value="">Sélectionnez le département</option>
+              <option value="informatique">Informatique</option>
+              <option value="infotronique">Infotronique</option>
+              <option value="mecatronique">Mécatronique</option>
+              <option value="industrielle">Industrielle</option>
+            </select>
+          </div>
         </div>
 
         {/* Groupe */}
