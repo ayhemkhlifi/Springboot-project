@@ -6,18 +6,10 @@ import Student from "@src/types/Student";
 export default function SearchBar() {
   // Sample student data
   const [students, setStudents] = useState<Student[]>([
-    { id: 1, name: "Ahmed Ben Ali", niveau: "1ère", groupe: "A", note: 15.5, stage: "Non" },
-    { id: 2, name: "Fatma Trabelsi", niveau: "2ème", groupe: "B", note: 17.0, stage: "Oui" },
-    { id: 3, name: "Mohamed Sassi", niveau: "3ème", groupe: "C", note: 14.2, stage: "Non" },
-    { id: 4, name: "Sarra Bouzid", niveau: "1ère", groupe: "A", note: 18.3, stage: "Oui" },
-    { id: 1, name: "Ahmed Ben Ali", niveau: "1ère", groupe: "A", note: 15.5, stage: "Non" },
-    { id: 2, name: "Fatma Trabelsi", niveau: "2ème", groupe: "B", note: 17.0, stage: "Oui" },
-    { id: 3, name: "Mohamed Sassi", niveau: "3ème", groupe: "C", note: 14.2, stage: "Non" },
-    { id: 4, name: "Sarra Bouzid", niveau: "1ère", groupe: "A", note: 18.3, stage: "Oui" },
-    { id: 1, name: "Ahmed Ben Ali", niveau: "1ère", groupe: "A", note: 15.5, stage: "Non" },
-    { id: 2, name: "Fatma Trabelsi", niveau: "2ème", groupe: "B", note: 17.0, stage: "Oui" },
-    { id: 3, name: "Mohamed Sassi", niveau: "3ème", groupe: "C", note: 14.2, stage: "Non" },
-    { id: 4, name: "Sarra Bouzid", niveau: "1ère", groupe: "A", note: 18.3, stage: "Oui" },
+    { id: 1, name: "Ahmed Ben Ali", niveau: "1ère", groupe: "A", departement: "informatique", note: 15.5, stage: "Non" },
+    { id: 2, name: "Fatma Trabelsi", niveau: "2ème", groupe: "B", departement: "mecatronique", note: 17, stage: "Oui" },
+    { id: 3, name: "Mohamed Sassi", niveau: "3ème", groupe: "C", departement: "industrielle", note: 14.2, stage: "Non" },
+    { id: 4, name: "Sarra Bouzid", niveau: "1ère", groupe: "A", departement: "infotronique", note: 18.3, stage: "Oui" },
   ]);
 
   // Function to update stage status

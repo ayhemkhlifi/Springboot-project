@@ -47,16 +47,10 @@ const ProfilePage: React.FC = () => {
     },
   ];
 
-  // Breadcrumbs Data
-  const breadcrumbs = [
-    { name: "Tableau de Bord", href: "/" },
-    { name: "Étudiant", href: "/etudiant" },
-    { name: "Nom", href: "/etudiant/nom" },
-    { name: "Suivi d’Avancement", href: "/suivi", current: true },
-  ];
+  
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className=" mt-4 p-6">
       {/* Breadcrumbs */}
      
 
