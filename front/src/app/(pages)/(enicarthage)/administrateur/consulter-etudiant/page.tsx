@@ -6,21 +6,14 @@ import Student from "@src/types/Student";
 export default function SearchBar() {
   // Sample student data
   const [students, setStudents] = useState<Student[]>([
-    { id: 1, name: "Ahmed Ben Ali", niveau: "1ère", groupe: "A", note: 15.5, stage: "Non" },
-    { id: 2, name: "Fatma Trabelsi", niveau: "2ème", groupe: "B", note: 17.0, stage: "Oui" },
-    { id: 3, name: "Mohamed Sassi", niveau: "3ème", groupe: "C", note: 14.2, stage: "Non" },
-    { id: 4, name: "Sarra Bouzid", niveau: "1ère", groupe: "A", note: 18.3, stage: "Oui" },
-    { id: 1, name: "Ahmed Ben Ali", niveau: "1ère", groupe: "A", note: 15.5, stage: "Non" },
-    { id: 2, name: "Fatma Trabelsi", niveau: "2ème", groupe: "B", note: 17.0, stage: "Oui" },
-    { id: 3, name: "Mohamed Sassi", niveau: "3ème", groupe: "C", note: 14.2, stage: "Non" },
-    { id: 4, name: "Sarra Bouzid", niveau: "1ère", groupe: "A", note: 18.3, stage: "Oui" },
-    { id: 1, name: "Ahmed Ben Ali", niveau: "1ère", groupe: "A", note: 15.5, stage: "Non" },
-    { id: 2, name: "Fatma Trabelsi", niveau: "2ème", groupe: "B", note: 17.0, stage: "Oui" },
-    { id: 3, name: "Mohamed Sassi", niveau: "3ème", groupe: "C", note: 14.2, stage: "Non" },
-    { id: 4, name: "Sarra Bouzid", niveau: "1ère", groupe: "A", note: 18.3, stage: "Oui" },
+    { id: 1, name: "Ahmed Ben Ali", niveau: "1ère", groupe: "A", departement: "informatique", note: 15.5, stage: "Non" },
+    { id: 2, name: "Fatma Trabelsi", niveau: "2ème", groupe: "B", departement: "mecatronique", note: 17, stage: "Oui" },
+    { id: 3, name: "Mohamed Sassi", niveau: "3ème", groupe: "C", departement: "industrielle", note: 14.2, stage: "Non" },
+    { id: 4, name: "Sarra Bouzid", niveau: "1ère", groupe: "A", departement: "infotronique", note: 18.3, stage: "Oui" },
   ]);
 
-  // Function to update stage status
+  const [filters, setFilters] = useState({ groupe: "", niveau: "", departement: "" });
+
   const handleStageChange = (id: number, value: "Oui" | "Non") => {
     setStudents((prevStudents) =>
       prevStudents.map((student) =>
@@ -28,6 +21,17 @@ export default function SearchBar() {
       )
     );
   };
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const filteredStudents = students.filter((student) =>
+    (filters.groupe === "" || student.groupe === filters.groupe) &&
+    (filters.niveau === "" || student.niveau === filters.niveau) &&
+    (filters.departement === "" || student.departement === filters.departement)
+  );
 
   return (
     <div className="flex flex-col items-center gap-4 w-full p-4">
@@ -45,7 +49,7 @@ export default function SearchBar() {
 
       {/* Filter Section */}
       <div className="flex gap-4">
-        <select className="border border-gray-300 bg-white rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <select name="groupe" onChange={handleFilterChange} className="border border-gray-300 bg-white rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-400">
           <option value="">Groupe</option>
           <option value="A">A</option>
           <option value="B">B</option>
@@ -53,11 +57,18 @@ export default function SearchBar() {
           <option value="D">D</option>
           <option value="E">E</option>
         </select>
-        <select className="border border-gray-300 bg-white rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <select name="niveau" onChange={handleFilterChange} className="border border-gray-300 bg-white rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-400">
           <option value="">Niveau</option>
           <option value="1ère">1ère</option>
           <option value="2ème">2ème</option>
           <option value="3ème">3ème</option>
+        </select>
+        <select name="departement" onChange={handleFilterChange} className="border border-gray-300 bg-white rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <option value="">Département</option>
+          <option value="informatique">Informatique</option>
+          <option value="mecatronique">Mecatronique</option>
+          <option value="industrielle">Industrielle</option>
+          <option value="infotronique">Infotronique</option>
         </select>
       </div>
 
@@ -70,17 +81,19 @@ export default function SearchBar() {
               <th className="p-3 text-left">Nom et Prénom</th>
               <th className="p-3 text-left">Niveau</th>
               <th className="p-3 text-left">Groupe</th>
+              <th className="p-3 text-left">Département</th>
               <th className="p-3 text-left">Stage</th>
               <th className="p-3 text-left">Note</th>
             </tr>
           </thead>
           <tbody>
-            {students.map((student, index) => (
+            {filteredStudents.map((student, index) => (
               <tr key={index} className={student.stage == "Non" ? "bg-gray-100" : "bg-white"}>
                 <td className="p-3">{student.id}</td>
                 <td className="p-3">{student.name}</td>
                 <td className="p-3">{student.niveau}</td>
                 <td className="p-3">{student.groupe}</td>
+                <td className="p-3">{student.departement}</td>
                 <td className="p-3">
                   <select
                     value={student.stage}

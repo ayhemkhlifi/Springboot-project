@@ -1,20 +1,16 @@
 
-import React from 'react'
-
-export default function page() {
-  return (
-    <div>page</div>
-  )
-}
-
-
-
 "use client"
-import React, { useState } from "react";
-import Link from "next/link";
+import React, { useState,useEffect } from "react";
+import { setWhoami } from "@src/utils/setWhoami";
+import Link from "@node_modules/next/link";
 const ProfilePage: React.FC = () => {
   const [image, setImage] = useState<string | null>(null);
-
+ useEffect(() => {
+     const success = setWhoami("etudiant");
+     if (!success) {
+       console.log("storage error");
+     }
+   }, []);
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
