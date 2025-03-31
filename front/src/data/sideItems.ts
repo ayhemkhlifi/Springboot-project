@@ -14,8 +14,11 @@ const sideList: Record<"student" | "administration" | "prof", SideMenuItemProps[
     { title: "Consulter etudiants", icon: Consulter, href: "/administrateur/consulter-etudiant" },
     { title: "Consulter professeurs", icon: ConsulterList, href: "/administrateur/consulter-professeur" },
     { title: "Gestion des Étudiants", icon: GestionList, href: "/administrateur/gestion-etudiant" },
+
     { title: "PFE", icon: PFE, href: "/administrateur/pfe" },
     { title: "Meilleurs posters", icon: Poster, href: "/administrateur/meilleur-poster" },  
+
+    { title: "Meilleurs posters", icon: Poster, href: "/meilleurposter" },  
   ],
   prof: [{ title: "Consulter utilisateurs", icon: AddUser, href: "administrateur/consulter-utilisateur" },], 
 };
