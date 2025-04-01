@@ -10,7 +10,12 @@ export default function PagesDefaultLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const whoami = useWhoami();
-  const menuItems = sideList[whoami] || sideList["student"];
+  const pathname = usePathname();
+   // Check if we are in the Encadrant page
+   const isEncadrantPage = pathname.startsWith("/encadrant");
+
+   // Choose the correct menu items based on the path
+   const menuItems = isEncadrantPage ? sideList["encadrant"] : sideList[whoami] || sideList["student"];
   return (
     <main>
       <DefaultLayout listItems={menuItems}>{children}</DefaultLayout>

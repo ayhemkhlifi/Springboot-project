@@ -2,7 +2,7 @@ import { Profile, AddUser, Consulter, GestionList, Poster } from "@src/component
 import { SideMenuItemProps } from "@src/types/sideMenu";
 
 
-const sideList: Record<"student" | "administration" | "prof", SideMenuItemProps[]> = {
+const sideList: Record<"student" | "administration" | "prof" | "encadrant", SideMenuItemProps[]> = {
   student: [
     { title: "Profile", icon: Profile, href: "etudiant/profile" },
   ],
@@ -12,7 +12,11 @@ const sideList: Record<"student" | "administration" | "prof", SideMenuItemProps[
     { title: "Gestion des Étudiants", icon: GestionList, href: "/administrateur/gestion-etudiant" },
     { title: "Meilleurs posters", icon: Poster, href: "/meilleurposter" },  
   ],
-  prof: [{ title: "Consulter utilisateurs", icon: AddUser, href: "administrateur/consulter-utilisateur" },], 
+  prof: [{ title: "Consulter utilisateurs", icon: AddUser, href: "administrateur/consulter-utilisateur" },],
+  encadrant: [
+    { title: "Consulter etudiants", icon: Consulter, href: "/encadrant/consulter-etudiant" },
+    { title: "Meilleurs posters", icon: Poster, href: "/meilleurposter" },  
+  ],
 };
 
 export { sideList };

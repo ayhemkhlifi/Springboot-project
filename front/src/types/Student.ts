@@ -6,5 +6,6 @@ interface Student {
   departement : "mecatronique" | "informatique" | "industrielle" | "infotronique";
   note: number;
   stage: "Oui" | "Non";
+  soutenance?: "Oui" | "Non";
 }
 export default Student;
