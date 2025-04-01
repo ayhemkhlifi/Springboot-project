@@ -1,4 +1,5 @@
-"use client"
+
+import SignUp from "@src/app/(pages)/SignUp/SignUp";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import logo from "@public/imgs/enicarthage_logo.webp"
@@ -22,7 +23,12 @@ const TypingText = () => {
     return () => clearInterval(interval);
   }, []);
 
+
   return (
+
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <SignUp />
+
     <div>
         <div className="flex text-white justify-center items-center h-screen text-6xl font-bold">
         <motion.span
@@ -34,6 +40,7 @@ const TypingText = () => {
         </motion.span>
       </div>
       <CustomImage src={logo} alt="enicarthage logo" />
+
     </div>
   );
 };
