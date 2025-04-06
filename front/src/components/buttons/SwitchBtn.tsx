@@ -23,7 +23,7 @@ export default function SwitchBtn() {
         )}
         onClick={() => toggleRole()}
       >
-        Professeur
+        Enseignant
       </button>
     </div>
   );

@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 
-type UserRole = "student" | "administration" | "prof";
+type UserRole = "etudiant" | "administrateur" | "enseignant";
 
 const useWhoami = (): UserRole => {
-  const [role, setRole] = useState<UserRole>("student");
+  const [role, setRole] = useState<UserRole>("enseignant");
 
   useEffect(() => {
     try {
@@ -23,7 +23,7 @@ const useWhoami = (): UserRole => {
 
 // Type guard for UserRole
 const isValidRole = (value: unknown): value is UserRole => {
-  return typeof value === "string" && ["student", "administration", "prof"].includes(value);
+  return typeof value === "string" && ["etudiant", "administrateur", "enseignant"].includes(value);
 };
 
 export default useWhoami;

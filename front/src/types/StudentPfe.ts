@@ -6,7 +6,9 @@ export type StudentPfe = {
     cin: string;
     hasSentence: boolean;
     sentenceLanguage: string;
+    pfeDate: string;
     profs: string[];
     note:number;
+   
   };
   

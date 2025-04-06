@@ -10,10 +10,10 @@ const initialProfs = [
 
 export default function Page() {
   const [search, setSearch] = useState('');
-  const [professeurs, setProfesseurs] = useState(initialProfs);
+  const [enseignants, setEnseignants] = useState(initialProfs);
   const [newStudent, setNewStudent] = useState('');
 
-  const filteredProfs = professeurs.filter(prof =>
+  const filteredProfs = enseignants.filter(prof =>
     `${prof.nom} ${prof.prenom}`.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -25,14 +25,14 @@ export default function Page() {
       <div className="bg-white p-4 rounded-xl shadow-md">
         <input 
           type="text" 
-          placeholder="Rechercher un professeur..." 
+          placeholder="Rechercher un enseignant..." 
           value={search} 
           onChange={(e) => setSearch(e.target.value)} 
           className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"
         />
       </div>
       
-      {/* Professeurs Table */}
+      {/* enseignants Table */}
       <div className="bg-white p-6 rounded-xl shadow-md">
         <table className="w-full border-collapse">
           <thead>

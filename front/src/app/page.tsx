@@ -1,46 +1,54 @@
-
-import SignUp from "@src/app/(pages)/SignUp/SignUp";
+"use client";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation"; 
 import { motion } from "framer-motion";
-import logo from "@public/imgs/enicarthage_logo.webp"
+import logo from "@public/imgs/enicarthage_logo.webp";
 import CustomImage from "@src/components/customImages/CustomImage";
 
 const TypingText = () => {
-  const text = "ENNICARTHAGE PLATFORME";
+  const router = useRouter(); 
+  const text = "ENNICARTHAGE PLATFORME"; 
   const [displayedText, setDisplayedText] = useState("");
-  
+
   useEffect(() => {
     let index = 0;
-    const interval = setInterval(() => {
+
+    const typeEffect = () => {
       if (index < text.length-1) {
         setDisplayedText((prev) => prev + text[index]);
         index++;
+        setTimeout(typeEffect, 100); 
       } else {
-        clearInterval(interval);
+        setTimeout(() => router.push("/sign-in"), 800);
       }
-    }, 100); 
+    };
 
-    return () => clearInterval(interval);
-  }, []);
-
+    typeEffect();
+  }, [router]); 
 
   return (
-
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <SignUp />
-
-    <div>
-        <div className="flex text-white justify-center items-center h-screen text-6xl font-bold">
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5 }}
-        >
-          {displayedText}
-        </motion.span>
-      </div>
-      <CustomImage src={logo} alt="enicarthage logo" />
-
+    <div className="flex flex-col justify-center items-center min-h-screen bg-gray-900 text-white text-5xl font-extrabold tracking-wider">
+      <motion.span
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="text-center"
+      >
+        {displayedText}
+      </motion.span>
+      
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.5 }} 
+        animate={{ opacity: 1, scale: 1 }} 
+        transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
+        className="mt-6"
+      >
+        <CustomImage 
+          src={logo} 
+          alt="ENICarthage Logo" 
+          className="w-40 h-40 rounded-full shadow-xl animate-pulse"
+        />
+      </motion.div>
     </div>
   );
 };

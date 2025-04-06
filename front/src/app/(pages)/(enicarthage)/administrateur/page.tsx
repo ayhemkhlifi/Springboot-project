@@ -1,15 +1,7 @@
-"use client"
-import React, { useEffect } from 'react';
-import { setWhoami } from '@src/utils/setWhoami';
+
 import logo_adm from "@public/imgs/administrateur.webp"
 import CustomImage from '@src/components/customImages/CustomImage';
 export default function AdminPage() {
-  useEffect(() => {
-    const success = setWhoami("administration");
-    if (!success) {
-      console.log("storage error");
-    }
-  }, []);
 
   return (
     <div className='text-white h-full overflow-hidden flex-center flex-col gap-4'>

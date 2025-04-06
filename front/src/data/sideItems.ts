@@ -1,29 +1,26 @@
-import { Profile, AddUser, Consulter, GestionList, Poster, PFE, ConsulterList } from "@src/components/icons/Icons";
+import { Profile, AddUser, Consulter, GestionList, Poster, PFE, ConsulterList,AddFile,Progress } from "@src/components/icons/Icons";
 import { SideMenuItemProps } from "@src/types/sideMenu";
 
 
-const sideList: Record<"student" | "administration" | "prof" | "encadrant", SideMenuItemProps[]> = {
-  student: [
-      { title: "Profile", icon: Profile, href: "/etudiant" },
-      { title: "Suivi d'Avancement", icon: Profile, href: "/etudiant/etu_avan" },
-      { title: "Add Documents", icon: Profile, href: "/etudiant/etu_upload" },
-      { title: "Meilleurs posters", icon: Poster, href: "/etudiant/meilleur-poster" },
+const sideList: Record<"etudiant" | "administrateur" | "enseignant", SideMenuItemProps[]> = {
+  etudiant: [
+      { title: "Profile", icon: Profile, href: "/etudiant",active: false  },
+      { title: "Suivi d'Avancement", icon: Progress, href: "/etudiant/etu_avan",active: false  },
+      { title: "Add Documents", icon: AddFile, href: "/etudiant/etu_upload",active: false  },
+      { title: "Meilleurs posters", icon: Poster, href: "/meilleur-poster",active: false  },
   ],
-  administration: [
-    { title: "Ajouter un utilisateur", icon: AddUser, href: "/administrateur/ajouter-utilisateur" },
-    { title: "Consulter etudiants", icon: Consulter, href: "/administrateur/consulter-etudiant" },
-    { title: "Consulter professeurs", icon: ConsulterList, href: "/administrateur/consulter-professeur" },
-    { title: "Gestion des Étudiants", icon: GestionList, href: "/administrateur/gestion-etudiant" },
-
-    { title: "PFE", icon: PFE, href: "/administrateur/pfe" },
-    { title: "Meilleurs posters", icon: Poster, href: "/administrateur/meilleur-poster" },  
-
-    { title: "Meilleurs posters", icon: Poster, href: "/meilleurposter" },  
+  administrateur: [
+    { title: "Ajouter un utilisateur", icon: AddUser, href: "/administrateur/ajouter-utilisateur",active: false },
+    { title: "Consulter etudiants", icon: Consulter, href: "/administrateur/consulter-etudiant",active: false  },
+    { title: "Consulter enseignants", icon: ConsulterList, href: "/administrateur/consulter-enseignant",active: false  },
+    { title: "Gestion des Étudiants", icon: GestionList, href: "/administrateur/gestion-etudiant",active: false  },
+    { title: "PFE", icon: PFE, href: "/administrateur/pfe",active: false  },
+    { title: "Meilleurs posters", icon: Poster, href: "/meilleur-poster",active: false  },  
+ 
   ],
-  prof: [{ title: "Consulter utilisateurs", icon: AddUser, href: "administrateur/consulter-utilisateur" },],
-  encadrant: [
-    { title: "Consulter etudiants", icon: Consulter, href: "/encadrant/consulter-etudiant" },
-    { title: "Meilleurs posters", icon: Poster, href: "/meilleurposter" },  
+  enseignant: [
+    { title: "Consulter etudiants", icon: Consulter, href: "/enseignant/consulter-etudiant",active: false  },
+    { title: "Meilleurs posters", icon: Poster, href: "/meilleur-poster",active: false  },  
   ],
 };
 

@@ -10,7 +10,7 @@ export default function EncadrantPage() {
   
     return (
         <div className='text-white h-full overflow-hidden flex-center flex-col gap-4'>
-        <h1 className='text-blue-400 text-6xl text-center'>Bienvenue sur la page de l'Encadrant</h1>
+        <h1 className='text-blue-400 text-6xl text-center'>Bienvenue sur la page de l'Enseignant</h1>
         <CustomImage src={logo_encd} alt='adm' className='w-auto h-[80%] rounded-md' />
       </div>
     );
