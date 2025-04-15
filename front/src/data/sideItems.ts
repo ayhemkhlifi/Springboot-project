@@ -4,9 +4,9 @@ import { SideMenuItemProps } from "@src/types/sideMenu";
 
 const sideList: Record<"etudiant" | "administrateur" | "enseignant", SideMenuItemProps[]> = {
   etudiant: [
-      { title: "Profile", icon: Profile, href: "/etudiant",active: false  },
-      { title: "Suivi d'Avancement", icon: Progress, href: "/etudiant/etu_avan",active: false  },
-      { title: "Add Documents", icon: AddFile, href: "/etudiant/etu_upload",active: false  },
+      { title: "Profile", icon: Profile, href: "/etudiant/profile",active: false  },
+      { title: "Suivi d'Avancement", icon: Progress, href: "/etudiant/etudiant-avancement",active: false  },
+      { title: "Add Documents", icon: AddFile, href: "/etudiant/etudiant-documents",active: false  },
       { title: "Meilleurs posters", icon: Poster, href: "/meilleur-poster",active: false  },
   ],
   administrateur: [
@@ -19,6 +19,7 @@ const sideList: Record<"etudiant" | "administrateur" | "enseignant", SideMenuIte
  
   ],
   enseignant: [
+    { title: "Profile", icon: Profile, href: "/enseignant/profile",active: false  },
     { title: "Consulter etudiants", icon: Consulter, href: "/enseignant/consulter-etudiant",active: false  },
     { title: "Meilleurs posters", icon: Poster, href: "/meilleur-poster",active: false  },  
   ],

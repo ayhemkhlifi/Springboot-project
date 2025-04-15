@@ -1,27 +1,23 @@
+// src/app/admin/page.tsx
 "use client";
-import SwitchBtn from "@src/components/buttons/SwitchBtn";
-import AddProfesseur from "@src/components/forms/AddProfesseur";
-import AddEtudiant from "@src/components/forms/AddEtudiant";
-import { SwitchProvider, useSwitch } from "@src/contexts/SwitchContext";
-import React from "react";
 
-function PageContent() {
-  const { isStudent } = useSwitch();
+import { useState } from "react";
+import { SwitchContext } from "@src/contexts/SwitchContext";
+import SwitchButton from "@src/components/buttons/SwitchBtn";
+import FormContainer from "@src/components/forms/FormContainer";
+
+export default function AdminPage() {
+  const [isStudent, setIsStudent] = useState(true);
 
   return (
-    <div className="flex-center flex-col gap-5 w-full h-full">
-      <SwitchBtn />
-      <div className="w-full h-full flex-center">
-        {isStudent ? <AddEtudiant /> : <AddProfesseur />}
+    <SwitchContext.Provider value={{
+      isStudent,
+      toggleSwitch: () => setIsStudent(!isStudent)
+    }}>
+      <div className="flex-center flex-col gap-5 w-full h-full p-4 bg-gray-50">
+        <SwitchButton />
+        <FormContainer />
       </div>
-    </div>
-  );
-}
-
-export default function Page() {
-  return (
-    <SwitchProvider>
-      <PageContent />
-    </SwitchProvider>
+    </SwitchContext.Provider>
   );
 }

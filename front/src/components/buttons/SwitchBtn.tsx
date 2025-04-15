@@ -1,30 +1,40 @@
-import React from "react";
-import { useSwitch } from "@src/contexts/SwitchContext";
-import clsx from "clsx";
+// src/components/buttons/SwitchBtn.tsx
+"use client";
 
-export default function SwitchBtn() {
-  const { isStudent, toggleRole } = useSwitch();
+import { motion } from "framer-motion";
+import { useContext } from "react";
+import { SwitchContext } from "@src/contexts/SwitchContext";
 
+const SwitchButton = () => {
+  const { isStudent, toggleSwitch } = useContext(SwitchContext);
+  
   return (
-    <div className="rounded-full overflow-hidden text-white border-2 border-gray-500 flex w-fit">
+    <motion.div 
+      whileHover={{ scale: 1.05 }}
+      className="flex items-center bg-gray-100 rounded-full p-1 shadow-sm"
+    >
       <button
-        className={clsx(
-          "w-32 px-4 py-2 border-r border-gray-500 transition-all cursor-pointer",
-          isStudent ? "bg-blue-500 text-white" : "bg-gray-300 text-black"
-        )}
-        onClick={() => toggleRole()}
+        onClick={toggleSwitch}
+        className={`px-6 py-2 rounded-full transition-colors ${
+          isStudent 
+            ? "bg-blue-600 text-white shadow-md" 
+            : "bg-transparent text-gray-500"
+        }`}
       >
         Étudiant
       </button>
       <button
-        className={clsx(
-          "w-32 px-4 py-2 transition-all cursor-pointer",
-          !isStudent ? "bg-blue-500 text-white" : "bg-gray-300 text-black"
-        )}
-        onClick={() => toggleRole()}
+        onClick={toggleSwitch}
+        className={`px-6 py-2 rounded-full transition-colors ${
+          !isStudent 
+            ? "bg-blue-600 text-white shadow-md" 
+            : "bg-transparent text-gray-500"
+        }`}
       >
         Enseignant
       </button>
-    </div>
+    </motion.div>
   );
-}
+};
+
+export default SwitchButton;

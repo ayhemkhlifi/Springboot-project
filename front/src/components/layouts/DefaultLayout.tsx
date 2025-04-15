@@ -2,25 +2,39 @@ import React, { ReactNode } from 'react';
 import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
 import { SideMenuItemProps } from '@src/types/sideMenu';
-interface DefaultLayoutProps {
-  children: ReactNode;
-  listItems : SideMenuItemProps[];
-}
-
 import { usePathname } from "next/navigation";
 
-const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children,listItems }) => {
+interface DefaultLayoutProps {
+  children: ReactNode;
+  listItems: SideMenuItemProps[];
+}
+
+const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children, listItems }) => {
   const pathname = usePathname().slice(1);
+  
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden bg-gray-50">
       {/* Sidebar Section */}
-      <Sidebar listItems={listItems}  />
+      <Sidebar listItems={listItems} />
 
       {/* Main Content Section */}
-      <div className="flex flex-col flex-1">
+      <div className="flex h-screen flex-col flex-1 overflow-hidden">
         <Header />
-        <div className='text-gray-300 p-4'>{pathname}</div>
-        <main className="px-4 size-full overflow-y-auto">{children}</main>
+        
+        {/* Content Container */}
+        <div className="flex-1 h-full overflow-y-hidden p-6">
+          {/* Path Display */}
+          <div className="mb-4">
+            <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
+              {pathname.replace(/-/g, ' ')}
+            </p>
+          </div>
+
+          {/* Main Content */}
+          <div className="max-w-7xl h-[95%] mx-auto  bg-white rounded-2xl shadow-sm  overflow-y-auto">
+            {children}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,67 +1,96 @@
+"use client";
 
-"use client"
-import React, { useState} from "react";
-import Link from "@node_modules/next/link";
-const ProfilePage: React.FC = () => {
-  const [image, setImage] = useState<string | null>(null);
- 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+import { motion } from "framer-motion";
+import CustomImage from '@src/components/customImages/CustomImage';
+import logo_etudiant from "@public/imgs/etudiant.webp"
 
+export default function EtudiantPage() {
   return (
-    <div className="flex flex-col items-center justify-center mt-4">
-      <div className="bg-white shadow-xl rounded-2xl p-6 w-[400px] border border-gray-200">
+    <div className="h-full flex-center flex-col  bg-gradient-to-br from-[#1A233B] to-[#0f172a] relative overflow-hidden">
+      {/* Éléments d'arrière-plan animés */}
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        className="absolute inset-0 flex items-center justify-center"
+      >
+        <div className="absolute w-[200%] h-[200%] bg-[radial-gradient(#2D5E3A_1px,transparent_1px)] [background-size:40px_40px] opacity-10" />
+      </motion.div>
+
+      {/* Contenu principal */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="relative z-10 flex flex-col items-center text-center max-w-2xl"
+      >
+        {/* Avatar étudiant */}
+        <motion.div
+          animate={{
+            y: [0, -15, 0],
+            scale: [1, 1.05, 1]
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="mb-8 relative w-40 h-40 sm:w-48 sm:h-48 rounded-full border-4 border-white/20 shadow-2xl overflow-hidden group"
+        >
+          <CustomImage 
+            src={logo_etudiant} 
+            alt="Profil étudiant" 
+            className="object-cover grayscale-[15%] group-hover:grayscale-0 transition-all duration-300"
+            fill
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0F2A1F]/60 to-transparent" />
+        </motion.div>
+
+        {/* Message de bienvenue */}
+        <h1 className="text-4xl sm:text-5xl font-bold text-gray-100 mb-4">
+          Bienvenue,{" "}
+          <span className="bg-gradient-to-r from-green-400 to-green-300 bg-clip-text text-transparent">
+            Étudiant
+          </span>
+        </h1>
         
-        {/* Profile Photo */}
-        <div className="flex flex-col items-center relative">
-          <div className="w-28 h-28 border-4 border-blue-500 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
-            {image ? (
-              <img src={image} alt="Profile" className="w-full h-full object-cover" />
-            ) : (
-              <label className="cursor-pointer text-gray-500 flex flex-col items-center">
-                <div className="cursor-pointer text-gray-500 flex flex-col items-center">
-                    <span className="text-2xl">📷</span> 
-                    <span className="text-xs">Upload Photo</span>
-                </div>
+        <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-md leading-relaxed">
+          Accédez à votre espace de stage{" "}
+          <span className="font-semibold text-green-300">ENICarthage</span>
+        </p>
 
-                <span className="text-xs">Upload Photo</span>
-                <input type="file" className="hidden" onChange={handleImageUpload} />
-              </label>
-            )}
-          </div>
+        {/* Décorations animées */}
+        <div className="flex space-x-4 mt-8">
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              animate={{
+                rotate: 360,
+                scale: [1, 1.2, 1],
+                y: [0, -5, 0]
+              }}
+              transition={{
+                duration: 3 + i,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="w-3 h-3 rounded-full bg-gradient-to-r from-green-400 to-green-300 shadow-green-glow"
+            />
+          ))}
         </div>
+      </motion.div>
 
-        {/* Profile Info */}
-        <div className="mt-6 text-center">
-          <h2 className="text-2xl font-bold text-gray-800">Firas Laouini</h2>
-          <p className="text-gray-500 text-sm">Étudiant à l'ENICarthage</p>
-        </div>
-
-        {/* Card Information */}
-        <div className="mt-4 space-y-2 border-t border-gray-200 pt-4">
-          <p className="text-gray-600 text-sm"><span className="font-semibold">Date de naissance:</span> 10/11/2001</p>
-          <p className="text-gray-600 text-sm"><span className="font-semibold">CIN:</span> 14772214</p>
-          <p className="text-blue-600 font-semibold text-sm">Carte Étudiant 2024-2025</p>
-        </div>
-
-        {/* Button */}
-        <Link href="etudiant/etu_avan">
-        <button className="mt-5 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition">
-          Voir Avancement Stage
-        </button>
-        </Link>
-      </div>
+      {/* Note de pied de page */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.8 }}
+        className="absolute bottom-6 text-center"
+      >
+        <p className="text-sm text-gray-400/80">
+          Plateforme de stage ENICarthage - {new Date().getFullYear()}
+        </p>
+        <div className="mt-1 h-px w-24 mx-auto bg-gradient-to-r from-transparent via-green-400 to-transparent" />
+      </motion.div>
     </div>
   );
-};
-
-export default ProfilePage;
-
+}

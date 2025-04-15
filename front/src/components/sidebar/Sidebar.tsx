@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
-import logo from "@public/imgs/enicarthage_logo.webp";
-import { SideMenuItemProps } from "@src/types/sideMenu";
-import CustomImage from "../customImages/CustomImage";
+import React, { useMemo } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import clsx from "clsx";
 import { usePathname } from "next/navigation";
+import clsx from "clsx";
+import CustomImage from "../customImages/CustomImage";
+import { SideMenuItemProps } from "@src/types/sideMenu";
 
 interface SidebarProps {
   listItems: SideMenuItemProps[];
@@ -14,49 +14,84 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ listItems }) => {
   const pathname = usePathname();
+
+  const optimizedListItems = useMemo(() => listItems, [listItems]);
+
+  const isActive = (href: string) => {
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
   return (
-    <aside className="bg-gray-200 w-48 sm:w-56 md:w-64 lg:w-72 border border-gray-400 p-4 shadow-md">
+    <motion.aside
+      initial={{ x: -20, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="flex flex-col h-screen bg-[#1A233B] border-r border-gray-700/50 w-64 p-6 backdrop-blur-lg"
+    >
       {/* Logo Section */}
-      <div className="flex items-center gap-3">
-        <div className="size-16 rounded-full overflow-hidden">
-          <CustomImage src={logo} alt="Enicarthage" priority />
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        className="flex items-center gap-4 mb-12 group"
+        role="banner"
+      >
+        <div className="size-14 rounded-full overflow-hidden border-2 border-white/20 shadow-lg">
+          <CustomImage
+            src="/imgs/enicarthage_logo.webp"
+            alt="ENICarthage Logo"
+            width={56}
+            height={56}
+            priority
+            className="object-cover p-1.5"
+          />
         </div>
-        <h5 className="text-[#2A84FB] font-bold text-lg">Enicarthage</h5>
-      </div>
+        <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200 font-bold text-xl">
+          ENICarthage
+        </h1>
+      </motion.div>
 
       {/* Menu Section */}
-      <h2 className="mt-4 text-gray-500 font-semibold">Menu Principale</h2>
-      <nav>
-        <ul className="mt-3 space-y-2">
-          {listItems.map((item) => {
-            const isActive = pathname.includes(item.href);
-
+      <nav className="flex-1" aria-label="Main navigation">
+        <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-6 pl-3">
+          Menu Principal
+        </h2>
+        <ul className="space-y-2">
+          {optimizedListItems.map((item, index) => {
+            const active = isActive(item.href);
             return (
-              <li
+              <motion.li
                 key={item.href}
-                className={clsx(
-                  "flex items-center gap-2",
-                  isActive ? "text-blue-600" : "text-gray-700",
-                  "hover:text-blue-600"
-                )}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: Math.min(index * 0.1, 0.5) }}
               >
                 <Link
                   href={item.href}
                   className={clsx(
-                    "flex items-center gap-3 p-2 rounded-lg transition",
-                    isActive && "bg-blue-100"
+                    "flex items-center gap-4 p-3 rounded-xl transition-all",
+                    "hover:bg-white/5 hover:pl-4 focus:outline-none focus:ring-2 focus:ring-blue-400",
+                    active
+                      ? "bg-blue-500/10 text-blue-300 border-l-4 border-blue-400"
+                      : "text-gray-300"
                   )}
+                  aria-current={active ? "page" : undefined}
                 >
-                  <item.icon className="w-5 h-5 text-blue-500" />
-                  <span className="text-base">{item.title}</span>
+                  <item.icon className="w-5 h-5 flex-shrink-0" aria-hidden="true" />
+                  <span className="text-sm font-medium">{item.title}</span>
                 </Link>
-              </li>
+              </motion.li>
             );
           })}
         </ul>
       </nav>
-    </aside>
+
+      {/* Footer */}
+      <footer className="pt-6 border-t border-gray-800/50 mt-auto">
+        <p className="text-xs text-gray-400 text-center">
+          © {new Date().getFullYear()} ENICarthage
+        </p>
+      </footer>
+    </motion.aside>
   );
 };
 
-export default Sidebar;
+export default React.memo(Sidebar);
